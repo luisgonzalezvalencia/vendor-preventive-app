@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons (click)="volver()" slot="start">
+        <ion-icon name="arrow-back"></ion-icon>
+        <ion-button>Volver</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+</ion-header>
+
+<ion-content fullscreen *ngIf="_cs.cliente && _cs.cliente !== null">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title><b>{{_cs.cliente.nombre}} {{_cs.cliente.apellido}}</b></ion-card-title>
+      <ion-card-subtitle>{{_cs.cliente.dni}}</ion-card-subtitle>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-list-header>
+          Datos personales:
+        </ion-list-header>
+        <ion-item>
+          <ion-label> <b>CUIL: </b>{{_cs.cliente.CUIL}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label> <b>Email: </b>{{_cs.cliente.email}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label> <b>Celular: </b>{{_cs.cliente.celular}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label> <b>Teléfono: </b>{{_cs.cliente.telefono}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label> <b>Dirección: </b>{{_cs.cliente.direccion}}, {{_cs.cliente.barrio}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-content fullscreen *ngIf="!_cs.cliente || _cs.cliente === null">
+  No se obtuvieron datos...
+</ion-content>

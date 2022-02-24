@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons (click)="volver()" slot="start">
+      <ion-icon name="arrow-back"></ion-icon>
+      <ion-button>Pedido</ion-button>
+    </ion-buttons>
+    <ion-title>Buscar Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-searchbar placeholder="Código Producto" (ionChange)="filtrarProductosBusqueda()" [(ngModel)]="codigobusqueda">
+</ion-searchbar>
+<!-- <ion-button expand="block" (click)="filtrarProductosBusqueda()" style="height: 50px;" color="primary">Filtrar
+</ion-button> -->
+<ion-content>
+  <ion-item *ngFor="let producto of productos">
+    <ion-grid>
+      <ion-row>
+        <b>{{producto.codigo}} | {{producto.nombre}}</b>
+      </ion-row>
+      <ion-row *ngIf="producto.listas.length > 0">
+        <ion-col>
+          <ion-item>
+            <ion-label>Precio Lista</ion-label>
+            <ion-select value="preciolista" interface="alert" cancelText="Cancelar"
+              [id]="'precioLista-'+producto.codigo">
+              <ion-select-option *ngFor="let lista of producto.listas" value="{{lista.listaid}}-{{lista.precioventa}}">
+                {{lista.lista}}: ${{lista.precioventa | number : '.2-2'}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Cantidad</ion-label>
+            <ion-select value="'1'" interface="alert" [id]="'cantidad-'+producto.codigo">
+              <ion-select-option *ngFor="let n of arrayCantidad" [selected]=" (n == '1')? true: false" value="{{n}}">
+                {{n}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="producto.listas.length > 0">
+        <ion-col size="12">
+          <ion-button expand="block" color="success" (click)="agregar(producto)">Agregar a Pedido</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-content>

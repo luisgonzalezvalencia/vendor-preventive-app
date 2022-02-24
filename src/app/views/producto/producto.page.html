@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons (click)="volver()" slot="start">
+        <ion-icon name="arrow-back"></ion-icon>
+        <ion-button>Volver</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+</ion-header>
+
+<ion-content fullscreen *ngIf="_ps.producto && _ps.producto !== null">
+  <ion-card>
+    <img [src]="_ps.producto.imagenurl" />
+    <ion-card-header>
+      <ion-card-title><b>{{_ps.producto.nombre}}</b></ion-card-title>
+      <ion-card-subtitle>{{_ps.producto.descripcion}}</ion-card-subtitle>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list *ngIf="_ps.producto.listas.length > 0">
+        <ion-list-header>
+          Precios de Lista:
+        </ion-list-header>
+        <ion-item *ngFor="let lista of _ps.producto.listas">
+          <ion-label>
+            <ion-row>
+              <ion-col size="8">
+                <b>{{lista.nombre}}:</b>
+              </ion-col>
+
+              <ion-col size="4">
+                <b class="color-blue">${{lista.precioventa | number : '.2-2'}}</b>
+              </ion-col>
+            </ion-row>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Otros Datos:
+        </ion-list-header>
+        <ion-item>
+          <ion-label> <b>Stock: {{_ps.producto.stock | number : '.2-2'}}</b></ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

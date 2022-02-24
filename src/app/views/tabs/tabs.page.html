@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-thumbnail slot="start">
+      <ion-img [src]="logo"></ion-img>
+    </ion-thumbnail>
+    <ion-buttons slot="primary">
+      <ion-button (click)="cerrar_sesion()" *ngIf="_us.activo()">Cerrar Sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-fab class="buttonfloating" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="NuevoPedido()" data-desc="Nuevo Pedido">
+        <ion-icon name="cart"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="MostrarPopOverFiltro()" data-desc="Filtrar">
+        <ion-icon name="search"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="LimpiarFiltros()" data-desc="Limpiar Filtros">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="RecargarTodos()" data-desc="Sincronizar Datos">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tab1">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab2">
+      <ion-icon name="pricetags"></ion-icon>
+      <ion-label>Productos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Clientes</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

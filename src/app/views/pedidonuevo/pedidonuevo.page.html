@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nuevo Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label><b>Cliente: </b></ion-label>
+    <ion-select placeholder="Selecciona uno" [(ngModel)]="cliente" (ngModelChange)="asignarCliente()">
+      <ion-select-option *ngFor="let cliente of _cs.clientes" value="{{cliente.id}}">{{cliente.nombre}}
+        {{cliente.apellido}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-searchbar placeholder="Código Producto" (keyup.enter)="BuscarProducto()" [(ngModel)]="codigobusqueda">
+      </ion-searchbar>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="block" (click)="BuscarProducto()" color="primary">Buscar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item-sliding *ngFor="let detalle of detalles">
+        <ion-item>
+          <ion-label>
+            <p>{{detalle.codigo}} | {{detalle.nombre}} | Precio Unitario: ${{detalle.preciounitario | number : '.2-2' }}
+            </p>
+            <p>Cantidad: {{detalle.cantidad}} - Subtotal: ${{detalle.subtotal | number : '.2-2' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="eliminarDetalle(detalle)" expandable>
+            Eliminar Detalle
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <span style="font-size: 30px;">Total Pedido: ${{total | number : '.2-2'}}</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button style="height: 50px;" expand="block" color="danger" (click)="guardarTemporal()">Guardar en Móvil
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button style="height: 50px;" expand="block" color="success" (click)="guardarPedido()">Enviar Pedido
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-footer>

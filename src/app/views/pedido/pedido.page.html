@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons (click)="volver()" slot="start">
+        <ion-icon name="arrow-back"></ion-icon>
+        <ion-button>Volver</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+</ion-header>
+
+<ion-content fullscreen *ngIf="_ps.pedido && _ps.pedido !== null">
+  <ion-list lines="full">
+    <ion-list-header class="datosCliente">
+      <ion-label><b>Cliente: </b> {{_ps.pedido.pedido.cliente}}
+        <br />
+        <b>Pedido realizado el {{_ps.pedido.pedido.fechacreacion}} </b>
+      </ion-label>
+
+    </ion-list-header>
+  </ion-list>
+  <ion-list *ngIf="_ps.pedido.totalesPorLista.length > 0">
+    <ion-list-header>
+      Total pedido por Lista:
+    </ion-list-header>
+    <ion-item *ngFor="let lista of _ps.pedido.totalesPorLista">
+      <ion-label>
+        <ion-row>
+          <ion-col size="8">
+            <b>{{lista.nombreLista}}:</b>
+          </ion-col>
+
+          <ion-col size="4">
+            <b class="color-blue">${{lista.total | number : '.2-2'}}</b>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Detalles Pedido:
+    </ion-list-header>
+    <ion-item *ngFor="let detalle of _ps.pedido.detalles">
+      <ion-label>
+        <p> {{detalle.codigo}} </p>
+        <p>{{detalle.nombre}} </p>
+        <p>Cantidad: {{detalle.cantidad}} | Precio: ${{detalle.preciounitario | number : '.2-2'}}</p>
+      </ion-label>
+
+      <ion-note color="primary" class="subtotal" slot="end">$ {{detalle.subtotal}}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "AppPreventista",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
